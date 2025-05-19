@@ -8,9 +8,7 @@ const MainDashboard = dynamic(() => import("@/components/dashboard/main-dashboar
   loading: () => <LoadingSpinner />,
 })
 
-// Commented out imports for components that don't exist yet
-// If you need these components, you'll need to create them
-/*
+// Now include all the section dashboards since they've been created
 const WaterDashboard = dynamic(() => import("@/components/water-dashboard"), {
   loading: () => <LoadingSpinner />,
 })
@@ -30,7 +28,6 @@ const ContractorDashboard = dynamic(() => import("@/features/contractors/compone
 const WasteManagementDashboard = dynamic(() => import("@/features/waste-management/components/waste-management-dashboard"), {
   loading: () => <LoadingSpinner />,
 })
-*/
 
 export default function Home() {
   return <MainDashboard />
