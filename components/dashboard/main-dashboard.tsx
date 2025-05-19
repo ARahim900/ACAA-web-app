@@ -26,16 +26,16 @@ export default function MainDashboard() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-80">
-        <div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full"></div>
+        <div className="animate-spin h-8 w-8 border-4 border-blue-500 border-t-transparent rounded-full"></div>
       </div>
     )
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <header className="mb-8">
-        <h1 className="text-3xl font-bold">Muscat Bay Operations Dashboard</h1>
-        <p className="text-muted-foreground">Overview of all utility services and operations</p>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Muscat Bay Operations Dashboard</h1>
+        <p className="text-gray-500 dark:text-gray-400">Overview of all utility services and operations</p>
       </header>
 
       {/* KPI Summary Cards */}
@@ -93,26 +93,32 @@ export default function MainDashboard() {
       {/* Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
         {/* Water & Electricity Usage Chart */}
-        <div className="bg-card p-6 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-4">Water & Electricity Monthly Usage</h2>
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Water & Electricity Monthly Usage</h2>
           <div className="h-80">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart
                 data={data}
                 margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
               >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="month" />
-                <YAxis yAxisId="left" />
-                <YAxis yAxisId="right" orientation="right" />
-                <Tooltip />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                <XAxis dataKey="month" stroke="#6b7280" />
+                <YAxis yAxisId="left" stroke="#6b7280" />
+                <YAxis yAxisId="right" orientation="right" stroke="#6b7280" />
+                <Tooltip 
+                  contentStyle={{ 
+                    backgroundColor: "#ffffff", 
+                    border: "1px solid #e5e7eb",
+                    borderRadius: "0.375rem"
+                  }} 
+                />
                 <Legend />
                 <Line
                   yAxisId="left"
                   type="monotone"
                   dataKey="water"
                   name="Water (m³)"
-                  stroke="var(--chart-1)"
+                  stroke="#3b82f6"
                   activeDot={{ r: 8 }}
                 />
                 <Line
@@ -120,7 +126,7 @@ export default function MainDashboard() {
                   type="monotone"
                   dataKey="electricity"
                   name="Electricity (kWh)"
-                  stroke="var(--chart-2)"
+                  stroke="#10b981"
                 />
               </LineChart>
             </ResponsiveContainer>
@@ -128,28 +134,34 @@ export default function MainDashboard() {
         </div>
 
         {/* STP Plant & Waste Chart */}
-        <div className="bg-card p-6 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-4">STP Plant Efficiency & Waste Collection</h2>
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">STP Plant Efficiency & Waste Collection</h2>
           <div className="h-80">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart
                 data={data}
                 margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
               >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="month" />
-                <YAxis />
-                <Tooltip />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                <XAxis dataKey="month" stroke="#6b7280" />
+                <YAxis stroke="#6b7280" />
+                <Tooltip 
+                  contentStyle={{ 
+                    backgroundColor: "#ffffff", 
+                    border: "1px solid #e5e7eb",
+                    borderRadius: "0.375rem"
+                  }} 
+                />
                 <Legend />
                 <Bar
                   dataKey="stpEfficiency"
                   name="STP Efficiency (%)"
-                  fill="var(--chart-3)"
+                  fill="#1e40af"
                 />
                 <Bar
                   dataKey="wasteCollection"
                   name="Waste (tons)"
-                  fill="var(--chart-4)"
+                  fill="#ec4899"
                 />
               </BarChart>
             </ResponsiveContainer>
@@ -177,13 +189,13 @@ function KpiCard({
   icon: React.ReactNode
 }) {
   return (
-    <div className="bg-card rounded-lg p-6 shadow">
+    <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
       <div className="flex justify-between items-start">
         <div>
-          <h3 className="text-lg font-medium text-muted-foreground">{title}</h3>
+          <h3 className="text-lg font-medium text-gray-500 dark:text-gray-400">{title}</h3>
           <div className="flex items-baseline mt-1">
-            <span className="text-2xl font-bold">{value}</span>
-            <span className="ml-1 text-sm text-muted-foreground">{unit}</span>
+            <span className="text-2xl font-bold text-gray-900 dark:text-white">{value}</span>
+            <span className="ml-1 text-sm text-gray-500 dark:text-gray-400">{unit}</span>
           </div>
           <div className="flex items-center mt-2">
             {trend === "up" ? (
@@ -198,10 +210,10 @@ function KpiCard({
             >
               {change}%
             </span>
-            <span className="ml-1 text-xs text-muted-foreground">vs last month</span>
+            <span className="ml-1 text-xs text-gray-500 dark:text-gray-400">vs last month</span>
           </div>
         </div>
-        <div className="bg-primary/10 p-3 rounded-full">{icon}</div>
+        <div className="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-full">{icon}</div>
       </div>
     </div>
   )
