@@ -42,20 +42,20 @@ export default function Sidebar() {
     <div
       className={`fixed top-0 left-0 z-40 h-screen transition-all duration-300 
       ${sidebarOpen ? "w-64" : "w-20"} 
-      bg-sidebar text-sidebar-foreground shadow-md
-      dark:bg-sidebar dark:text-sidebar-foreground`}
+      bg-gray-50 text-gray-700 shadow-md
+      dark:bg-gray-900 dark:text-gray-200`}
     >
       <div className="flex h-full flex-col overflow-y-auto">
         {/* Sidebar header */}
         <div className="relative flex h-16 items-center justify-between px-4">
           {sidebarOpen && (
-            <div className="text-2xl font-semibold text-sidebar-primary">
+            <div className="text-2xl font-semibold text-gray-900 dark:text-white">
               Muscat Bay
             </div>
           )}
           <button
             onClick={toggleSidebar}
-            className={`p-2 text-sidebar-foreground hover:text-sidebar-primary ${
+            className={`p-2 text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white ${
               sidebarOpen ? "absolute right-4" : "mx-auto"
             }`}
           >
@@ -144,8 +144,8 @@ export default function Sidebar() {
             onClick={toggleDarkMode}
             className={`flex items-center w-full p-2 rounded-md transition-colors
             ${sidebarOpen ? "justify-start" : "justify-center"}
-            ${darkMode ? "text-yellow-400" : "text-sidebar-foreground"}
-            hover:bg-sidebar-accent hover:text-sidebar-accent-foreground`}
+            ${darkMode ? "text-yellow-400" : "text-gray-700 dark:text-gray-300"}
+            hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-white`}
           >
             <SunMoon size={24} />
             {sidebarOpen && (
@@ -189,8 +189,8 @@ function NavItem({
       className={`group relative flex items-center p-2 text-sm rounded-md transition-colors 
       ${
         isActive
-          ? "bg-sidebar-primary text-sidebar-primary-foreground"
-          : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+          ? "bg-blue-600 text-white"
+          : "text-gray-700 dark:text-gray-300 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-white"
       } 
       ${sidebarOpen ? "justify-start" : "justify-center"}`}
       onMouseEnter={() => setHoveredItem(section)}
@@ -201,13 +201,13 @@ function NavItem({
       {sidebarOpen ? (
         <span className="ml-3 flex-1 whitespace-nowrap">{label}</span>
       ) : isHovered && !isActive ? (
-        <div className="absolute left-full top-0 ml-6 min-w-max rounded-md bg-sidebar-accent px-2 py-1 text-sm text-sidebar-accent-foreground shadow-md">
-          <div className="absolute -left-1 top-[50%] h-2 w-2 -translate-y-1/2 rotate-45 bg-sidebar-accent"></div>
+        <div className="absolute left-full top-0 ml-6 min-w-max rounded-md bg-white dark:bg-gray-800 px-2 py-1 text-sm text-gray-900 dark:text-white shadow-md">
+          <div className="absolute -left-1 top-[50%] h-2 w-2 -translate-y-1/2 rotate-45 bg-white dark:bg-gray-800"></div>
           {label}
         </div>
       ) : null}
       {isActive && !sidebarOpen && (
-        <div className="absolute right-0 top-1/2 h-6 w-1 -translate-y-1/2 rounded-l-full bg-sidebar-primary-foreground" />
+        <div className="absolute right-0 top-1/2 h-6 w-1 -translate-y-1/2 rounded-l-full bg-white" />
       )}
       {sidebarOpen && isActive && (
         <ChevronRight size={16} className="ml-auto flex-shrink-0" />
