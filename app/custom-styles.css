@@ -1,0 +1,83 @@
+/* Custom styles to fix dropdown option text colors */
+
+/* Global fix for all dropdown options */
+option {
+  color: #333 !important; /* Dark text color for better readability */
+  background-color: white !important;
+}
+
+/* Ensure dropdown menus have proper contrast */
+select option {
+  color: #333 !important;
+  background-color: white !important;
+}
+
+/* Fix for native date picker dropdown */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+/* Fix for date picker dropdown */
+.date-picker-dropdown,
+.react-datepicker__month-container,
+.react-datepicker__day,
+.react-datepicker__day-name,
+.react-datepicker__current-month,
+.react-datepicker__month-dropdown,
+.react-datepicker__year-dropdown,
+.react-datepicker__time-list-item {
+  color: #333 !important;
+  background-color: white !important;
+}
+
+/* Fix for calendar popup */
+::-webkit-calendar-picker-indicator {
+  filter: invert(0.8);
+}
+
+/* Fix for select elements with transparent background */
+select.bg-white\/10 option,
+select[class*="bg-white"] option,
+select[class*="text-white"] option,
+select.border-white\/20 option {
+  color: #333 !important;
+  background-color: white !important;
+}
+
+/* Comprehensive fix for all utility dashboards */
+/* STP Plant section */
+.bg-white\/10 option,
+.border-white\/20 option {
+  color: #333 !important;
+  background-color: white !important;
+}
+
+/* Electricity Management section */
+.container select option,
+.container select.bg-white\/10 option {
+  color: #333 !important;
+  background-color: white !important;
+}
+
+/* Month Selector component */
+.month-selector .dropdown-menu option,
+.month-selector-dropdown option {
+  color: #333 !important;
+  background-color: white !important;
+}
+
+/* Fix for any custom dropdown components */
+[class*="dropdown"] option,
+[class*="select"] option {
+  color: #333 !important;
+  background-color: white !important;
+}
+
+/* Fix for any dropdown in dark-themed sections */
+[class*="dark"] select option,
+[style*="background"] select option {
+  color: #333 !important;
+  background-color: white !important;
+}
