@@ -7,25 +7,17 @@ import {
   Home, 
   Droplets, 
   Zap, 
-  Recycle, 
-  HardHat, 
-  Trash2, 
-  Menu, 
-  ChevronRight, 
-  SunMoon
+  Building2, 
+  Users, 
+  ChevronLeft
 } from "lucide-react"
 
 export default function Sidebar() {
   const { sidebarOpen, setSidebarOpen, currentSection, setCurrentSection, darkMode, setDarkMode } = useAppContext()
-  const [hoveredItem, setHoveredItem] = useState<string | null>(null)
 
   // Function to handle navigation item click
   const handleNavClick = (section: string) => {
     setCurrentSection(section)
-    // On mobile, close sidebar after navigation
-    if (window.innerWidth < 768) {
-      setSidebarOpen(false)
-    }
   }
 
   // Toggle sidebar
@@ -33,185 +25,118 @@ export default function Sidebar() {
     setSidebarOpen(!sidebarOpen)
   }
 
-  // Toggle dark mode
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode)
-  }
-
   return (
     <div
       className={`fixed top-0 left-0 z-40 h-screen transition-all duration-300 
       ${sidebarOpen ? "w-64" : "w-20"} 
-      bg-gray-50 text-gray-700 shadow-md
-      dark:bg-gray-900 dark:text-gray-200`}
+      bg-[#4f4359] text-white shadow-md`}
     >
-      <div className="flex h-full flex-col overflow-y-auto">
-        {/* Sidebar header */}
-        <div className="relative flex h-16 items-center justify-between px-4">
-          {sidebarOpen && (
-            <div className="text-2xl font-semibold text-gray-900 dark:text-white">
-              Muscat Bay
-            </div>
-          )}
-          <button
-            onClick={toggleSidebar}
-            className={`p-2 text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white ${
-              sidebarOpen ? "absolute right-4" : "mx-auto"
-            }`}
-          >
-            <Menu size={24} />
-          </button>
+      {/* App Logo */}
+      <div className="flex items-center h-16 px-6">
+        <div className="flex items-center gap-3">
+          <div className="w-6 h-6 bg-white flex items-center justify-center">
+            <span className="text-[#4f4359] font-bold text-xs">MB</span>
+          </div>
+          {sidebarOpen && <span className="font-semibold text-lg">Muscat Bay</span>}
         </div>
+        {sidebarOpen && (
+          <button onClick={toggleSidebar} className="ml-auto">
+            <ChevronLeft size={18} />
+          </button>
+        )}
+      </div>
 
-        {/* Navigation */}
-        <nav className="mt-4 flex-1 space-y-1 px-3">
-          {/* Dashboard */}
+      {/* Navigation */}
+      <nav className="mt-6 px-3">
+        <ul className="space-y-1">
           <NavItem
-            icon={<Home size={24} />}
+            icon={<Home size={20} />}
             label="Dashboard"
-            section="dashboard"
-            currentSection={currentSection}
+            href="/"
+            isActive={currentSection === "dashboard"}
             sidebarOpen={sidebarOpen}
-            hoveredItem={hoveredItem}
-            setHoveredItem={setHoveredItem}
             onClick={() => handleNavClick("dashboard")}
           />
-
-          {/* Water Management */}
           <NavItem
-            icon={<Droplets size={24} />}
-            label="Water"
-            section="water"
-            currentSection={currentSection}
+            icon={<Droplets size={20} />}
+            label="Water Analysis"
+            href="/water"
+            isActive={currentSection === "water"}
             sidebarOpen={sidebarOpen}
-            hoveredItem={hoveredItem}
-            setHoveredItem={setHoveredItem}
             onClick={() => handleNavClick("water")}
           />
-
-          {/* Electricity Management */}
           <NavItem
-            icon={<Zap size={24} />}
-            label="Electricity"
-            section="electricity"
-            currentSection={currentSection}
+            icon={<Zap size={20} />}
+            label="Electricity Analysis"
+            href="/electricity"
+            isActive={currentSection === "electricity"}
             sidebarOpen={sidebarOpen}
-            hoveredItem={hoveredItem}
-            setHoveredItem={setHoveredItem}
             onClick={() => handleNavClick("electricity")}
           />
-
-          {/* STP Plant */}
           <NavItem
-            icon={<Recycle size={24} />}
+            icon={<Building2 size={20} />}
             label="STP Plant"
-            section="stp-plant"
-            currentSection={currentSection}
+            href="/stp-plant"
+            isActive={currentSection === "stp-plant"}
             sidebarOpen={sidebarOpen}
-            hoveredItem={hoveredItem}
-            setHoveredItem={setHoveredItem}
             onClick={() => handleNavClick("stp-plant")}
           />
-
-          {/* Waste Management */}
           <NavItem
-            icon={<Trash2 size={24} />}
-            label="Waste"
-            section="waste-management"
-            currentSection={currentSection}
+            icon={<Users size={20} />}
+            label="Contractor Tracker"
+            href="/contractors"
+            isActive={currentSection === "contractors"}
             sidebarOpen={sidebarOpen}
-            hoveredItem={hoveredItem}
-            setHoveredItem={setHoveredItem}
-            onClick={() => handleNavClick("waste-management")}
-          />
-
-          {/* Contractors */}
-          <NavItem
-            icon={<HardHat size={24} />}
-            label="Contractors"
-            section="contractors"
-            currentSection={currentSection}
-            sidebarOpen={sidebarOpen}
-            hoveredItem={hoveredItem}
-            setHoveredItem={setHoveredItem}
             onClick={() => handleNavClick("contractors")}
           />
-        </nav>
+        </ul>
+      </nav>
 
-        {/* Footer */}
-        <div className="mt-auto pb-4 px-3">
-          <button
-            onClick={toggleDarkMode}
-            className={`flex items-center w-full p-2 rounded-md transition-colors
-            ${sidebarOpen ? "justify-start" : "justify-center"}
-            ${darkMode ? "text-yellow-400" : "text-gray-700 dark:text-gray-300"}
-            hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-white`}
-          >
-            <SunMoon size={24} />
-            {sidebarOpen && (
-              <span className="ml-3 text-sm font-medium">
-                {darkMode ? "Light Mode" : "Dark Mode"}
-              </span>
-            )}
-          </button>
+      {/* User Profile */}
+      <div className="absolute bottom-0 left-0 right-0 p-4">
+        <div className="flex items-center">
+          <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center text-xs text-gray-700">
+            AU
+          </div>
+          {sidebarOpen && (
+            <div className="ml-3">
+              <p className="text-sm font-medium">Admin User</p>
+              <p className="text-xs text-gray-300">admin@muscatbay.com</p>
+            </div>
+          )}
         </div>
       </div>
     </div>
   )
 }
 
-// NavItem component
 function NavItem({
   icon,
   label,
-  section,
-  currentSection,
+  href,
+  isActive,
   sidebarOpen,
-  hoveredItem,
-  setHoveredItem,
   onClick,
 }: {
   icon: React.ReactNode
   label: string
-  section: string
-  currentSection: string
+  href: string
+  isActive: boolean
   sidebarOpen: boolean
-  hoveredItem: string | null
-  setHoveredItem: (item: string | null) => void
   onClick: () => void
 }) {
-  const isActive = currentSection === section
-  const isHovered = hoveredItem === section
-
   return (
-    <Link
-      href={`/${section === "dashboard" ? "" : section}`}
-      className={`group relative flex items-center p-2 text-sm rounded-md transition-colors 
-      ${
-        isActive
-          ? "bg-blue-600 text-white"
-          : "text-gray-700 dark:text-gray-300 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-white"
-      } 
-      ${sidebarOpen ? "justify-start" : "justify-center"}`}
-      onMouseEnter={() => setHoveredItem(section)}
-      onMouseLeave={() => setHoveredItem(null)}
-      onClick={onClick}
-    >
-      <span className="flex-shrink-0">{icon}</span>
-      {sidebarOpen ? (
-        <span className="ml-3 flex-1 whitespace-nowrap">{label}</span>
-      ) : isHovered && !isActive ? (
-        <div className="absolute left-full top-0 ml-6 min-w-max rounded-md bg-white dark:bg-gray-800 px-2 py-1 text-sm text-gray-900 dark:text-white shadow-md">
-          <div className="absolute -left-1 top-[50%] h-2 w-2 -translate-y-1/2 rotate-45 bg-white dark:bg-gray-800"></div>
-          {label}
-        </div>
-      ) : null}
-      {isActive && !sidebarOpen && (
-        <div className="absolute right-0 top-1/2 h-6 w-1 -translate-y-1/2 rounded-l-full bg-white" />
-      )}
-      {sidebarOpen && isActive && (
-        <ChevronRight size={16} className="ml-auto flex-shrink-0" />
-      )}
-    </Link>
+    <li>
+      <Link
+        href={href}
+        className={`flex items-center gap-3 px-3 py-3 rounded-md transition-colors ${
+          isActive ? "bg-white/10 font-medium" : "hover:bg-white/5"
+        }`}
+        onClick={onClick}
+      >
+        <span className="flex-shrink-0">{icon}</span>
+        {sidebarOpen && <span>{label}</span>}
+      </Link>
+    </li>
   )
 }
